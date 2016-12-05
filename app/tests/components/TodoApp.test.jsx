@@ -19,6 +19,6 @@ describe('TodoApp', () => {
         });
 
         todoApp.handleAddTodo(todoText);
-        expect(todoApp.state.todo[0].text).toBe(todoText);
+        expect(todoApp.state.todos[0].text).toBe(todoText);
     });
 });
