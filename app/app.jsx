@@ -1,12 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 const { Provider } = require('react-redux');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+const {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
-var TodoApp = require('TodoApp');
 
+const TodoApp = require('TodoApp');
 const actions = require('actions');
 const store = require('configureStore').configure();
+const TodoAPI = require('TodoAPI');
+
+store.subscribe(() => {
+  const state = store.getState();
+  TodoAPI.setTodos(state.todos);
+});
+
+const initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 // load app.css
 require('style!css!sass!applicationStyles');
