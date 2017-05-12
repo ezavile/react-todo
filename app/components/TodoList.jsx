@@ -1,10 +1,12 @@
-var React = require('react');
-var Todo = require('Todo');
+const React = require('react');
+const { connect } = require('react-redux');
 
-var TodoList = React.createClass({
+import Todo from 'Todo';
+
+export const TodoList = React.createClass({
     render: function() {
-        var { todos } = this.props;
-        var renderTodos = () => {
+        const { todos } = this.props;
+        const renderTodos = () => {
             if (todos.length === 0) {
                 return <p className="container__message"> Nothing To Do</p>
             }
@@ -24,4 +26,10 @@ var TodoList = React.createClass({
     }
 });
 
-module.exports = TodoList;
+export default connect(
+    (state) => {
+        return {
+            todos: state.todos
+        };
+    }
+)(TodoList);
